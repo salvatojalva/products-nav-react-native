@@ -97,7 +97,7 @@ const AgregarProducto = ({ ShowProdutoModal, setShowProdutoModal, ProductList, s
                         onChangeText={setExistencia}
                     >
                     </TextInput>
-                    <Text style={styles.texto} >Fehca de vencimiento</Text>
+                    <Text style={styles.texto} >Fecha de vencimiento</Text>
                     <TextInput
                         placeholder='Fecha de vencimiento'
                         style={styles.box}
