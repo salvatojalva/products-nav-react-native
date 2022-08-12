@@ -13,14 +13,9 @@ export const Producto = ({ item }) => {
                       
                         <View style={styles.container}>
                             <View style={styles.row}>
-                                
                                 <Text style={styles.description}>{Descripcion}</Text>
-
-                                
                             </View>
-
                         </View>
-
                         <View style={styles.container}>
                             <View style={styles.row}>
                                 <Text style={styles.codigo}># {Codigo}</Text>
@@ -41,8 +36,6 @@ export const Producto = ({ item }) => {
                         </View>
                     </View>
                 </View>
-
-
             </View>
         </>
     )

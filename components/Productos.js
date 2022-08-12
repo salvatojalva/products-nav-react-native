@@ -70,14 +70,7 @@ export const Productos = () => {
               >
               </FlatList>
             )
-
         }
-
-
-
-
-
-
       </SafeAreaView>
 
     </>
