@@ -9,6 +9,7 @@ import {
   SafeAreaView
 } from 'react-native';
 import AgregarProducto from './productos/AgregarProducto';
+import DetalleIndividual from './productos/DetalleIndividual';
 import { Producto } from './productos/Producto';
 
 const Separator = () => (
@@ -18,7 +19,36 @@ const Separator = () => (
 export const Productos = () => {
 
   const [ShowProdutoModal, setShowProdutoModal] = useState(false)
-  const [ProductList, setProductList] = useState([])
+
+  const [ShowDetail, setShowModelDetail] = useState(false);
+  const [animateModal, setanimateModal] = useState(false);
+  
+  const [ProductList, setProductList] = useState([
+    {
+      Codigo: 'ASC3FS1',
+      Descripcion: 'PC Master race',
+      PrecioCosto: '123.11',
+      PrecioVenta: '123.33',
+      Existencia: '12',
+      Fecha: '123123'
+    },
+    {
+      Codigo: '23L232',
+      Descripcion: 'MVE 2TB',
+      PrecioCosto: '545.11',
+      PrecioVenta: '44.44',
+      Existencia: '55',
+      Fecha: '123534'
+    }
+  ]);
+  const [ProductDetail, setProductDetail] = useState({
+    Codigo: '',
+    Descripcion: '',
+    PrecioCosto: '',
+    PrecioVenta: '',
+    Existencia: '',
+    Fecha: ''
+  });
 
   return (
     <>
@@ -37,6 +67,16 @@ export const Productos = () => {
           >
 
           </AgregarProducto>
+           
+          <DetalleIndividual
+             ShowDetail={ShowDetail}
+             setShowModelDetail={setShowModelDetail}
+             animateModal={animateModal}
+             setanimateModal={setanimateModal}
+             ProductDetail={ProductDetail}
+             
+          />
+
         </View>
         <Separator />
 
@@ -60,6 +100,10 @@ export const Productos = () => {
 
                       <Producto
                         item={item}
+                        setShowProdutoModal={setShowProdutoModal}
+                        setShowModelDetail={setShowModelDetail}
+                        setProductDetail={setProductDetail}
+                        ProductDetail={ProductDetail}
                       >
                       </Producto>
 

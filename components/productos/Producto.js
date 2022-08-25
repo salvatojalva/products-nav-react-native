@@ -1,27 +1,33 @@
 import React from 'react'
-import { Text, View, StyleSheet, Button } from 'react-native'
+import { Text, View, StyleSheet, Button, Pressable } from 'react-native'
 
-export const Producto = ({ item }) => {
+export const Producto = ({ item, setShowProdutoModal, setShowModelDetail, setProductDetail }) => {
 
-    const { Codigo, Descripcion, PrecioVenta, PrecioCosto, Existencia } = item
+    const { Codigo, Descripcion, PrecioVenta, PrecioCosto, Existencia, Fecha } = item
 
     return (
         <>
             <View style={styles.body}>
                 <View style={styles.row}>
                     <View style={styles.col3}>
-                      
-                        <View style={styles.container}>
-                            <View style={styles.row}>
-                                <Text style={styles.description}>{Descripcion}</Text>
+                        <Pressable
+                            onPressOut={() =>{
+                                setShowModelDetail(true)
+                                setProductDetail(item)
+                            }}
+                        >
+                            <View style={styles.container}>
+                                <View style={styles.row}>
+                                    <Text style={styles.description}>{Descripcion}</Text>
+                                </View>
                             </View>
-                        </View>
-                        <View style={styles.container}>
-                            <View style={styles.row}>
-                                <Text style={styles.codigo}># {Codigo}</Text>
-                                <Text style={styles.stock}>Disponibles: {Existencia}</Text>
+                            <View style={styles.container}>
+                                <View style={styles.row}>
+                                    <Text style={styles.codigo}># {Codigo}</Text>
+                                    <Text style={styles.stock}>Disponibles: {Existencia}</Text>
+                                </View>
                             </View>
-                        </View>
+                        </Pressable>
                     </View>
                     <View style={styles.col1}>
                         <View style={styles.container}>
@@ -30,10 +36,16 @@ export const Producto = ({ item }) => {
                                 <Text>{PrecioVenta}</Text>
                             </Text>
                             <Text style={styles.costo}>
-                                Costo 
+                                Costo
                                 <Text> Q{PrecioCosto}</Text>
                             </Text>
                         </View>
+                        <Button
+                            title='EDITAR'
+                            onPress={() => setShowProdutoModal(true)}
+                        >
+
+                        </Button>
                     </View>
                 </View>
             </View>
@@ -71,25 +83,25 @@ const styles = StyleSheet.create({
         fontSize: 12,
         fontWeight: '800',
         color: '#cccc',
-        textAlign:'left'
+        textAlign: 'left'
     },
-    stock:{
+    stock: {
         fontSize: 12,
         fontWeight: '600',
     },
-    description:{
+    description: {
         fontSize: 23,
         fontWeight: 'bold',
         color: '#339DFF'
     },
-    venta:{
+    venta: {
         fontSize: 18,
         fontWeight: 'bold'
     },
-    costo:{
+    costo: {
         paddingTop: 17,
         fontSize: 12,
-        
+
     }
 
 });
