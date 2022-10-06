@@ -43,12 +43,12 @@ const AgregarProducto = ({ ShowProdutoModal, setShowProdutoModal, ProductList, s
             Fecha
         }
         const tepmNewList = [...ProductList, nuevoProducto];
+
         setProductList(tepmNewList)
-        console.log(tepmNewList);
+        
         try {
             await AsyncStorage.setItem('products', JSON.stringify(tepmNewList))
           } catch (e) {
-            console.log(e)
             alert('Failed to save the data to the storage')
           }
 

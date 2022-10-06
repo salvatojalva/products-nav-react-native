@@ -26,27 +26,7 @@ export const Productos = () => {
   const [ShowDetail, setShowModelDetail] = useState(false);
   const [animateModal, setanimateModal] = useState(false);
   
-  const temData = [
-    {
-      Codigo: 'ASC3FS1',
-      Descripcion: 'PC Master race',
-      PrecioCosto: '123.11',
-      PrecioVenta: '123.33',
-      Existencia: '12',
-      Fecha: '123123'
-    },
-    {
-      Codigo: '23L232',
-      Descripcion: 'MVE 2TB',
-      PrecioCosto: '545.11',
-      PrecioVenta: '44.44',
-      Existencia: '55',
-      Fecha: '123534'
-    }
-  ];
-  
-
-  const [ProductList, setProductList] = useState(temData);
+  const [ProductList, setProductList] = useState([]);
 
   const readData = async () => {
     try {
@@ -62,10 +42,6 @@ export const Productos = () => {
   useEffect(() => {
     readData();
   }, []);
-
-  
-
-
 
   const [ProductDetail, setProductDetail] = useState({
     Codigo: '',
