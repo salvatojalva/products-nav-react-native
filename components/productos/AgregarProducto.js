@@ -11,6 +11,9 @@ import {
     Button,
     View
 } from 'react-native';
+
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
 const AgregarProducto = ({ ShowProdutoModal, setShowProdutoModal, ProductList, setProductList }) => {
 
     const [Codigo, setCodigo] = useState('')
@@ -20,7 +23,7 @@ const AgregarProducto = ({ ShowProdutoModal, setShowProdutoModal, ProductList, s
     const [Existencia, setExistencia] = useState('')
     const [Fecha, setFecha] = useState('')
 
-    const agregarProducto = () => {
+    const agregarProducto = async () => {
         const misDatos = [Codigo, Descripcion, PrecioCosto, PrecioVenta, Existencia, Fecha]
         if (misDatos.includes('')) {
             Alert.alert(
@@ -39,7 +42,16 @@ const AgregarProducto = ({ ShowProdutoModal, setShowProdutoModal, ProductList, s
             Existencia,
             Fecha
         }
-        setProductList([...ProductList, nuevoProducto])
+        const tepmNewList = [...ProductList, nuevoProducto];
+        setProductList(tepmNewList)
+        console.log(tepmNewList);
+        try {
+            await AsyncStorage.setItem('products', JSON.stringify(tepmNewList))
+          } catch (e) {
+            console.log(e)
+            alert('Failed to save the data to the storage')
+          }
+
         setShowProdutoModal(false)
         setCodigo('')
         setDescripcion('')

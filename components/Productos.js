@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 
 import {
   Button,
@@ -12,6 +12,9 @@ import AgregarProducto from './productos/AgregarProducto';
 import DetalleIndividual from './productos/DetalleIndividual';
 import { Producto } from './productos/Producto';
 
+import AsyncStorage from '@react-native-async-storage/async-storage';
+
+
 const Separator = () => (
   <View style={styles.separator} />
 );
@@ -23,7 +26,7 @@ export const Productos = () => {
   const [ShowDetail, setShowModelDetail] = useState(false);
   const [animateModal, setanimateModal] = useState(false);
   
-  const [ProductList, setProductList] = useState([
+  const temData = [
     {
       Codigo: 'ASC3FS1',
       Descripcion: 'PC Master race',
@@ -40,7 +43,30 @@ export const Productos = () => {
       Existencia: '55',
       Fecha: '123534'
     }
-  ]);
+  ];
+  
+
+  const [ProductList, setProductList] = useState(temData);
+
+  const readData = async () => {
+    try {
+      const value = await AsyncStorage.getItem('products');
+  
+      if (value !== null) {
+        setProductList(JSON.parse(value));
+      }
+    } catch (e) {
+      // alert('Failed to fetch the input from storage');
+    }
+  };
+  useEffect(() => {
+    readData();
+  }, []);
+
+  
+
+
+
   const [ProductDetail, setProductDetail] = useState({
     Codigo: '',
     Descripcion: '',
